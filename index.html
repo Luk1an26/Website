@@ -15,7 +15,7 @@
         body {
             min-height: 100vh;
             /* YOUR CUSTOM BACKGROUND (embedded directly) */
-            background-image: url('https://sketchfab.com/3d-models/android-a7d7c17eadc54aa5a0094415025463ff');
+            background-image: url('https://developer.android.com/static/images/brand/android-head_3D.png');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -287,7 +287,7 @@
             const avatarImg = document.getElementById('avatarImg');
             avatarImg.addEventListener('dblclick', function() {
                 const newUrl = prompt('Change avatar URL (current is hardcoded, but you can update):', avatarImg.src);
-                if (newUrl && newUrl.trim() !== '') {
+                if (newUrl && newUrl.trim() !== 'https://cdn.discordapp.com/avatars/1346868834388148305/7e4dbcad896be2d2cfa36108947e2366.webp?size=128') {
                     avatarImg.src = newUrl.trim();
                 }
             });
@@ -297,7 +297,7 @@
             document.body.addEventListener('dblclick', function(e) {
                 if (e.target === avatarImg || e.target.closest('.tag')) return;
                 const bgUrl = prompt('Change background image URL (leave empty to keep current):', 
-                    'https://cdn.discordapp.com/avatars/1346868834388148305/7e4dbcad896be2d2cfa36108947e2366.webp?size=128');
+                    'https://developer.android.com/static/images/brand/android-head_3D.png');
                 if (bgUrl !== null && bgUrl.trim() !== '') {
                     document.body.style.backgroundImage = `url('${bgUrl.trim()}')`;
                     document.body.style.backgroundSize = 'cover';
