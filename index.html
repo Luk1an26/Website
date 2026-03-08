@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANDRSwerty - Bio</title>
+    <title>BSOD bio · YOUR background & avatar</title>
     <style>
-        /* minimalist reset – just to erase default margins/paddings */
+        /* RESET + GLOBAL */
         * {
             margin: 0;
             padding: 0;
@@ -13,51 +13,299 @@
         }
 
         body {
-            /* black background for the whole page */
-            background-color: #000000;
-            
-            /* use flexbox to push content to the middle */
             min-height: 100vh;
+            /* YOUR CUSTOM BACKGROUND (embedded directly) */
+            background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: 'Segoe UI', 'Consolas', 'Monaco', 'Lucida Console', monospace;
             display: flex;
-            align-items: center;   /* vertical center */
-            justify-content: center; /* horizontal center */
-            
-            /* fallback font – clean, nothing fancy */
-            font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
         }
 
-        /* the white text in the middle */
-        .center-text {
-            color: #ffffff;          /* white */
-            font-size: clamp(3rem, 15vw, 12rem); /* big, but scales nicely */
-            font-weight: 500;         /* medium weight – not too bold, not too light */
-            line-height: 1.1;
-            letter-spacing: 0.02em;   /* tiny breathing */
-            text-align: center;
-            word-break: break-word;   /* if screen becomes extremely narrow */
-            text-shadow: 0 0 10px rgba(255,255,255,0.3); /* very subtle glow — still white */
+        /* TILT CARD CONTAINER */
+        .tilt-card {
+            max-width: 760px;
+            width: 100%;
+            transform-style: preserve-3d;
+            transform: perspective(1200px) rotateX(0deg) rotateY(0deg);
+            transition: transform 0.1s ease-out;
+            will-change: transform;
         }
 
-        /* optional: make it pixel perfect on huge displays */
-        html {
+        /* MAIN CARD: BSOD AESTHETIC */
+        .bsod-card {
+            background-color: #0a6cf5;
+            color: #ffffff;
+            border: 4px solid #ffffff;
+            border-radius: 24px;
+            padding: 2.5rem 2rem;
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.6),
+                inset 0 0 0 2px rgba(255, 255, 255, 0.5),
+                0 0 0 2px #0a6cf5;
+            font-family: 'Consolas', 'Lucida Console', 'Courier New', monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            word-break: break-word;
+            transition: box-shadow 0.2s, border-color 0.2s;
+        }
+
+        .bsod-card:hover {
+            border-color: #ffffb0;
+            box-shadow: 
+                0 25px 45px rgba(0, 0, 0, 0.8),
+                inset 0 0 0 2px rgba(255, 255, 255, 0.9),
+                0 0 20px #ffffff80;
+        }
+
+        /* HEADER ROW */
+        .bsod-header {
+            display: flex;
+            align-items: center;
+            gap: 1.8rem;
+            margin-bottom: 2.2rem;
+            border-bottom: 3px solid white;
+            padding-bottom: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        .avatar-frame {
+            flex-shrink: 0;
+            width: 90px;
+            height: 90px;
+            border-radius: 14px;
+            background: white;
+            padding: 4px;
+            box-shadow: 0 0 0 3px #0a6cf5, 0 0 0 5px white;
+        }
+
+        .avatar-frame img {
+            width: 100%;
             height: 100%;
+            object-fit: cover;
+            display: block;
+            background: #a8d1ff;
+            image-rendering: crisp-edges;
+        }
+
+        .bsod-title {
+            flex: 1;
+        }
+
+        .bsod-title .line {
+            display: block;
+            font-size: 1.3rem;
+            font-weight: 700;
+            line-height: 1.5;
+        }
+
+        .bsod-title .line:first-child {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .bsod-title .line:last-child {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-family: monospace;
+        }
+
+        /* DESCRIPTION */
+        .bsod-description {
+            background: #083a9e;
+            padding: 1.5rem 1.2rem;
+            border-left: 10px solid white;
+            margin: 1.8rem 0 2.2rem 0;
+            font-size: 1.25rem;
+            font-weight: 500;
+            line-height: 1.5;
+            box-shadow: inset 0 0 10px #00000055;
+            word-break: break-word;
+        }
+
+        .bsod-description span {
+            display: block;
+            font-family: 'Consolas', monospace;
+        }
+
+        .bsod-description .code {
+            color: #FFFFAA;
+            font-size: 1.5rem;
+            margin-top: 0.5rem;
+            text-shadow: 2px 2px 0 #00000080;
+        }
+
+        /* SOCIAL TAGS - clickable links */
+        .social-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            margin: 1.5rem 0 1rem;
+            justify-content: flex-start;
+            border-top: 2px solid white;
+            padding-top: 1.8rem;
+        }
+
+        .tag {
+            background: #ffffff;
+            color: #0a6cf5;
+            font-weight: 800;
+            padding: 0.6rem 1.8rem;
+            font-size: 1.3rem;
+            border-radius: 60px;
+            text-transform: uppercase;
+            border: 3px solid #ffffff;
+            box-shadow: 5px 5px 0 #0011aa, 0 0 0 2px white;
+            letter-spacing: 1.5px;
+            transition: 0.1s linear;
+            font-family: 'Consolas', 'Courier New', monospace;
+            text-decoration: none;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .tag:hover {
+            background: #0a6cf5;
+            color: white;
+            box-shadow: 5px 5px 0 #ffffff;
+            border-color: #ffffff;
+        }
+
+        /* FOOTER */
+        .bsod-footer {
+            margin-top: 1.8rem;
+            font-size: 0.9rem;
+            color: #c3dcff;
+            border-top: 2px solid white;
+            padding-top: 1.2rem;
+            text-align: right;
+            text-transform: none;
+            font-family: monospace;
+        }
+
+        /* responsiveness */
+        @media (max-width: 550px) {
+            .bsod-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            .avatar-frame {
+                width: 80px;
+                height: 80px;
+            }
+            .tag {
+                padding: 0.4rem 1.2rem;
+                font-size: 1.1rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- simple element: only the exact string "ANDRSwerty" -->
-    <div class="center-text">ANDRSwerty</div>
+    <!-- TILT CARD -->
+    <div class="tilt-card" id="tiltCard">
+        <!-- main bsod bio card -->
+        <div class="bsod-card">
+            
+            <!-- HEADER with YOUR CUSTOM AVATAR (embedded directly) -->
+            <div class="bsod-header">
+                <div class="avatar-frame">
+                    <img src="https://cdn.discordapp.com/avatars/1346868834388148305/7e4dbcad896be2d2cfa36108947e2366.webp?size=128" alt="YOUR avatar" id="avatarImg" style="cursor: pointer;">
+                </div>
+                <div class="bsod-title">
+                    <span class="line">Making Viruses</span>
+                    <span class="line">// ANDRSwerty</span>
+                </div>
+            </div>
 
-    <!-- no javascript needed, but we keep a minimal console greet (optional) -->
+            <!-- DESCRIPTION -->
+            <div class="bsod-description">
+                <span>私は親友のヴォヴォチカを愛しています。絶対に彼を見捨てません。最高の兄貴です ❤️❤️❤️</span>
+            </div>
+
+            <!-- SOCIAL TAGS - working links -->
+            <div class="social-tags">
+                <a href="andrswerty" target="_blank" rel="noopener noreferrer" class="tag">discord</a>
+                <a href="https://www.youtube.com/@ANDRSwerty" target="_blank" rel="noopener noreferrer" class="tag">youtube</a>
+                <a href="https://tiktok.com/ANDRSwerty" target="_blank" rel="noopener noreferrer" class="tag">tiktok</a>
+            </div>
+
+            <!-- FOOTER -->
+            <div class="bsod-footer">
+                <span>11 yo Programmer</span>
+            </div>
+        </div>
+    </div>
+
     <script>
         (function() {
-            // extremely light – just to prove js is present, but does not change anything visual.
-            // you can delete this if you want pure css/html, but the task asked for a single file
-            // with html, css, js. this script does absolutely nothing to the style or content.
-            // it only logs a silent message (invisible to the user).
-            if (window.console) {
-                console.log("Зачем ты сюда смотриш???");
+            // ========== YOUR LINKS ARE ALREADY HARDCODED IN CSS/HTML ==========
+            // Background: Unsplash retro waveform (already in body style)
+            // Avatar: pravatar image (already in img src)
+            // But you can still change them on double-click if you want.
+
+            // MOUSE DIRECTION TILT (same as before)
+            const card = document.getElementById('tiltCard');
+            const MAX_ANGLE = 10;
+            let ticking = false;
+
+            function handleMouseMove(e) {
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        const rect = card.getBoundingClientRect();
+                        const mouseX = e.clientX - rect.left;
+                        const mouseY = e.clientY - rect.top;
+                        
+                        const normX = (mouseX / rect.width) * 2 - 1;
+                        const normY = (mouseY / rect.height) * 2 - 1;
+                        
+                        const rotateY = -normX * MAX_ANGLE;
+                        const rotateX = -normY * MAX_ANGLE;
+
+                        card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                        
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
             }
+
+            function handleMouseLeave() {
+                card.style.transform = `perspective(1200px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+                ticking = false;
+            }
+
+            card.addEventListener('mousemove', handleMouseMove);
+            card.addEventListener('mouseleave', handleMouseLeave);
+
+            // (Optional) double-click to change avatar if you ever want to tweak
+            const avatarImg = document.getElementById('avatarImg');
+            avatarImg.addEventListener('dblclick', function() {
+                const newUrl = prompt('Change avatar URL (current is hardcoded, but you can update):', avatarImg.src);
+                if (newUrl && newUrl.trim() !== '') {
+                    avatarImg.src = newUrl.trim();
+                }
+            });
+            avatarImg.title = 'double‑click to change avatar (optional)';
+
+            // double-click to change background too (optional)
+            document.body.addEventListener('dblclick', function(e) {
+                if (e.target === avatarImg || e.target.closest('.tag')) return;
+                const bgUrl = prompt('Change background image URL (leave empty to keep current):', 
+                    'https://cdn.discordapp.com/avatars/1346868834388148305/7e4dbcad896be2d2cfa36108947e2366.webp?size=128');
+                if (bgUrl !== null && bgUrl.trim() !== '') {
+                    document.body.style.backgroundImage = `url('${bgUrl.trim()}')`;
+                    document.body.style.backgroundSize = 'cover';
+                    document.body.style.backgroundPosition = 'center';
+                }
+            }, false);
+
+            console.log('niger why you look here?!');
         })();
     </script>
 </body>
